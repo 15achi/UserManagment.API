@@ -4,8 +4,10 @@ using DataAL.Entities.UserDbModel;
 using DataAL.Page;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nest;
 using Newtonsoft.Json;
 using UserManagement.BLL.Models.Users;
+using UserManagment.API.ErrorMiddleware;
 
 namespace UserManagment.API.Controllers
 {
@@ -55,7 +57,10 @@ namespace UserManagment.API.Controllers
 
             if (_userService.UserExists(userDto.PrivateNumber.Trim()))
             {
-                return Ok(new { message = "User-ი ამ -'" + userDto.PrivateNumber + "'-ით უკვე არსებობს" });
+                throw new AppException ("User-ი ამ -'" + userDto.PrivateNumber + "'-ით უკვე არსებობს");
+
+              //  throw new Exception("User-ი ამ -'" + userDto.PrivateNumber + "'-ით უკვე არსებობს");
+
             }
 
             _userService.AddUser(userDto);
@@ -125,5 +130,7 @@ namespace UserManagment.API.Controllers
             _userService.ActivationOfUser(privatenumber);
             return Ok(new { message = "user Activated" });
         }
+
+        
     }
 }
