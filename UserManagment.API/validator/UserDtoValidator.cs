@@ -35,9 +35,9 @@ namespace UsersManagment.Models
                 .Must(IsValidNamber).WithMessage("{Phone} უნდა შედგებოდეს ციფრებისგან");
 
             RuleFor(u => u.BirthDate).NotNull().NotEmpty()
-                .WithMessage("{BirthDate} არ უნდა იყოს  ცარიელი/ნალი")
-                .GreaterThan(p => new DateTime(1922, 1, 1))
-                .LessThan(p => new DateTime(2012, 1, 1)).WithMessage("{BirthDate} უნდა იყოს მეტი 1922 და ნაკლები 2012");
+                .WithMessage("{BirthDate} არ უნდა იყოს  ცარიელი/ნალი");
+               // .GreaterThan(p => new DateTime(1922, 1, 1))
+               // .LessThan(p => new DateTime(2012, 1, 1)).WithMessage("{BirthDate} უნდა იყოს მეტი 1922 და ნაკლები 2012");
 
             RuleFor(u => u.Email).NotNull().NotEmpty().EmailAddress()
                 .WithMessage("{Email} არ უნდა იყოს ცარილეი/ნალი და უნდა იყოს მეილი");

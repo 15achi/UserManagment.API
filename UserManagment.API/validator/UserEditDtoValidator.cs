@@ -32,12 +32,12 @@ namespace UserManagment.API.validator
             });
 
             RuleFor(u => u.Phone)
-                .Length(9, 50).When(x => !string.IsNullOrEmpty(x.Phone))
-                .WithMessage("{Phone}-ი უნდა შედგებოდეს მინიმუმ 9 და მაქსიმუმ  50 ციფრისგან ");
+                .Length(1, 50).When(x => !string.IsNullOrEmpty(x.Phone))
+                .WithMessage("{Phone}-ი უნდა შედგებოდეს  ციფრისგან ");
 
-            RuleFor(u => u.BirthDate)
-                .GreaterThan(p => new DateTime(1922, 1, 1)).When(x => !x.Equals(null))
-                .LessThan(p => new DateTime(2012, 1, 1)).When(x => !x.Equals(null)).WithMessage("{BirthDate} უნდა იყოს მეტი 1922 და ნაკლები 2012");
+            RuleFor(u => u.BirthDate).NotNull().NotEmpty().WithMessage("{BirthDate} არ უნდა იყოს  ცარიელი/ნალი");
+               // .GreaterThan(p => new DateTime(1922, 1, 1)).When(x => !x.Equals(null))
+               // .LessThan(p => new DateTime(2012, 1, 1)).When(x => !x.Equals(null)).WithMessage("{BirthDate} უნდა იყოს მეტი 1922 და ნაკლები 2012");
 
             RuleFor(u => u.Email)
                 .EmailAddress().When(x => !string.IsNullOrEmpty(x.Email))
