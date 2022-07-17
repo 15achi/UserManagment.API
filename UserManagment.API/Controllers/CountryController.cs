@@ -20,7 +20,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetCountries")]
+       // [Route("GetCountries")]
         //[Authorize(Roles = "Admin,User")]
         public IActionResult GetCountries([FromQuery] CountryParameters countryParameters)
         {
