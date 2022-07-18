@@ -1,4 +1,5 @@
 ﻿
+using DataAL.Entities.Models;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -38,17 +39,21 @@ namespace UserManagment.API.Test.Systems.Controller
         {
             //Arrange
             var Countryservice = new Mock<ICountryService>();
-            var newCountry = CountryData.AddCountryDto().Name; 
+            var newCountry = CountryData.AddCountryDto().Name;
             var sut = new CountryController(Countryservice.Object);
+             CountryDto country = new CountryDto();
+            country.Name = newCountry;
+
+
 
             //Act
-            var result = sut.AddCountry(newCountry);
+            var result = sut.AddCountry(country);
 
             //Assert
             Countryservice.Verify(Countryservice => Countryservice.AddCountry(newCountry), Times.Exactly(1));
 
         }
-
+        
         [Fact]
 
         public void SaveReturnsBadRequest()
@@ -57,9 +62,11 @@ namespace UserManagment.API.Test.Systems.Controller
             var Countryservice = new Mock<ICountryService>();
             var newCountry = CountryData.AddCountryDto().Name;
             var sut = new CountryController(Countryservice.Object);
+            CountryDto country = new CountryDto();
+            country.Name = newCountry;
 
             //Act
-            var result = sut.AddCountry(newCountry);
+            var result = sut.AddCountry(country);
 
             //Assert
 
@@ -67,7 +74,7 @@ namespace UserManagment.API.Test.Systems.Controller
             Assert.False(Countryservice.Object.CountryExists(newCountry));
 
         }
-
+        
         [Fact]
         public void Delete()
         {

@@ -19,5 +19,10 @@ namespace DataAL.Entities.Models
         public Gender Gender { get; set; }
         public int Active { get; set; } = 1;
 
+        public string RefreshToken { get; set; } = string.Empty;
+
+        public DateTime TokenCreated { get; set; }
+        public DateTime TokenExpires { get; set; }
+
     }
 }

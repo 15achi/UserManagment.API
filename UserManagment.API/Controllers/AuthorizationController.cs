@@ -58,7 +58,9 @@ namespace UserManagment.API.Controllers
                 return BadRequest("Wrong password");
             }
 
-            string token = CreateToken(user);
+            TokenResponse token = new TokenResponse();
+
+            token.JWTToken = CreateToken(user);
 
             return Ok(token);
         }
