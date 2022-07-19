@@ -21,7 +21,7 @@ namespace UserManagment.API.Controllers
 
         [HttpGet]
        // [Route("GetCountries")]
-        //[Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetCountries([FromQuery] CountryParameters countryParameters)
         {
             var countryies = _countryServices.GetCountries(countryParameters);
@@ -43,7 +43,7 @@ namespace UserManagment.API.Controllers
 
 
         [HttpGet("{CountryName}")]
-        //[Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetCountry(string CountryName)
         {
             if (!ModelState.IsValid)
@@ -60,7 +60,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpPost]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddCountry(CountryDto CountryDto)
         {
             if (!ModelState.IsValid)
@@ -79,7 +79,7 @@ namespace UserManagment.API.Controllers
 
 
         [HttpDelete("{CountryName}")]
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteCountry(string CountryName)
         {
             if (!ModelState.IsValid)

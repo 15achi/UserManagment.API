@@ -25,7 +25,7 @@ namespace UserManagment.API.Controllers
 
         [HttpGet]
         [Route("GetUsers")]
-       // [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetUsers([FromQuery] UserParameters userParameters)
             {
                 var users = _userService.GetUsers(userParameters);
@@ -49,7 +49,7 @@ namespace UserManagment.API.Controllers
 
         [HttpPost]
        // [Route("CreateUser")]
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateUser([FromBody] UserDto userDto)
         {
             if (!ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpGet("{PrivateNumber}")]
-      //  [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetUserByPrivateNumber(string PrivateNumber)
         {
             if (!ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace UserManagment.API.Controllers
 
         [HttpPut]
        // [Route("UpdateUserByPrivateNumber")]
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult EditUser([FromBody] UserEditDto userEditDto)
         {
             if (!ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpDelete("{privatenumber}")]
-    //    [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteUser(string privatenumber)
         {
             if (!ModelState.IsValid)
@@ -110,7 +110,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpPut("PassingTheUser/{privatenumber}")]
-     //   [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult PassiveOfUser(string privatenumber)
         {
             if (!ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace UserManagment.API.Controllers
         }
 
         [HttpPut("ActivationOfUser/{privatenumber}")]
-     //   [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ActivationOfUser(string privatenumber)
         {
             if (!ModelState.IsValid)
