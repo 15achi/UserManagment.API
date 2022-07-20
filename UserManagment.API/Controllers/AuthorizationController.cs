@@ -134,7 +134,8 @@ namespace UserManagment.API.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,user.FirstName),
-                new Claim(ClaimTypes.Role,((Role) Enum.ToObject(typeof (Role), user.Role)).ToString())
+                new Claim(ClaimTypes.Role,((Role) Enum.ToObject(typeof (Role), user.Role)).ToString()),
+                new Claim("role",((Role) Enum.ToObject(typeof (Role), user.Role)).ToString())
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
