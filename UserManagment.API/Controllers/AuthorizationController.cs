@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using UserManagement.BLL.Models.Users;
+using UserManagment.API.ErrorMiddleware;
 
 namespace UserManagment.API.Controllers
 {
@@ -56,7 +57,9 @@ namespace UserManagment.API.Controllers
 
             if (user.PasswordHash != pass)
             {
-                return BadRequest("Wrong password");
+                throw new AppException("პაროლი არ არის სწორი");
+
+                //return BadRequest("Wrong password");
             }
 
             TokenResponse token = new TokenResponse();
