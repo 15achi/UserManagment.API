@@ -178,6 +178,43 @@ namespace DataAL.Repository
             return ListOfUsers;
         }
 
+        public IQueryable<UsersGetDto> PassListOfUsers()
+        {
+            var ListOfUsers = (from U in _context.Users
+                               join C in _context.Countries
+                               on U.Country.Id equals C.Id
+                               where U.Active == 0
+                               select new
+                               {
+                                   privateNumber = U.PrivateNumber,
+                                   firstName = U.FirstName,
+                                   lastName = U.LastName,
+                                   phone = U.Phone,
+                                   email = U.Email,
+                                   birthDate = U.BirthDate,
+                                   address = U.Address,
+                                   roleType = (Role)U.Role,
+                                   country = C.Name,
+                                   genderType = (Gender)U.Gender,
+                                   countryId = C.Id
+                               }).Select(x => new UsersGetDto
+                               {
+                                   PrivateNumber = x.privateNumber,
+                                   FirstName = x.firstName,
+                                   LastName = x.lastName,
+                                   Phone = x.phone,
+                                   Email = x.email,
+                                   BirthDate = x.birthDate,
+                                   Address = x.address,
+                                   RoleType = x.roleType.ToString(),
+                                   GenderType = x.genderType.ToString(),
+                                   Country = x.country,
+                                   CountryId = x.countryId
+                               });
+
+            return ListOfUsers;
+        }
+
         public Country GetCountryByUserEditDtoId(UserEditDto userEditDto)
         {
             return _context.Countries.First(c => c.Id == userEditDto.CountryId);
@@ -209,6 +246,11 @@ namespace DataAL.Repository
             _context.Users.Update(user);
 
             return Save();
+        }
+
+        public List<UsersGetDto> GetPassingUsers()
+        {
+            return (List<UsersGetDto>)PassListOfUsers().ToList();
         }
     }
 }

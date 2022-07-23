@@ -44,7 +44,21 @@ namespace UserManagment.API.Controllers
                 Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
                 return Ok(users);
             }
-        
+
+
+        [HttpGet]
+        [Route("GetPassUsers")]
+        [Authorize(Roles = "Admin,User")]
+        public IActionResult GetPassUsers()
+        {
+            var users = _userService.GetPassingUsers();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(users);
+        }
+
 
 
         [HttpPost]
@@ -109,25 +123,25 @@ namespace UserManagment.API.Controllers
             return Ok(new { message = "User deleted" }); 
         }
 
-        [HttpPut("PassingTheUser/{privatenumber}")]
+        [HttpPut("PassingTheUser")]
         [Authorize(Roles = "Admin")]
-        public IActionResult PassiveOfUser(string privatenumber)
+        public IActionResult PassiveOfUser([FromBody]  UserPrivateNumber pNumber)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _userService.PassingTheUser(privatenumber);
+            _userService.PassingTheUser(pNumber.PrivateNumber);
             return Ok(new { message = "user passed" }); 
         }
 
-        [HttpPut("ActivationOfUser/{privatenumber}")]
+        [HttpPut("ActivationOfUser")]
         [Authorize(Roles = "Admin")]
-        public IActionResult ActivationOfUser(string privatenumber)
+        public IActionResult ActivationOfUser([FromBody] UserPrivateNumber pNumber)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _userService.ActivationOfUser(privatenumber);
+            _userService.ActivationOfUser(pNumber.PrivateNumber);
             return Ok(new { message = "user Activated" });
         }
 

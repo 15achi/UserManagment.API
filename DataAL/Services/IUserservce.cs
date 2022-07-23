@@ -8,6 +8,8 @@ namespace DataAL.Services
     public interface IUserservce
     {
         PagedList<UsersGetDto> GetUsers(UserParameters userParameters);
+
+        List<UsersGetDto>  GetPassingUsers();
         Country GetCountryById(UserDto userDto);
         Country GetCountryByUserEditDtoId(UserEditDto userEditDto);
         User GetUserByPrivateNumber(string privatenumber);

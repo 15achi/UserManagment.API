@@ -62,6 +62,13 @@ namespace UserManagment.API.Controllers
                 //return BadRequest("Wrong password");
             }
 
+            if (user.Active == 0)
+            {
+                throw new AppException("იუზერი არა აქტიურია");
+
+                //return BadRequest("Wrong password");
+            }
+
             TokenResponse token = new TokenResponse();
 
             var refreshToken = GenerateRefreshToken();

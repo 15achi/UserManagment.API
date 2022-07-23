@@ -76,6 +76,11 @@ namespace UserManagement.BLL.Models.Users
             return Namber.All(char.IsNumber);
         }
 
+        public List<UsersGetDto> GetPassingUsers()
+        {
+            return _userservce.GetPassingUsers();
+        }
+
 
         public string AppExceptionOrPrivatenumber(string privatenumber)
         {
@@ -148,7 +153,8 @@ namespace UserManagement.BLL.Models.Users
                 return userEditDto;
             }
         }
-       
+
+     
     }
     
 }

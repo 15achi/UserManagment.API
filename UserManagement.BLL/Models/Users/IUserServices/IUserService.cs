@@ -8,6 +8,8 @@ namespace UserManagement.BLL.Models.Users
     public interface IUserService
     {
         PagedList<UsersGetDto> GetUsers(UserParameters userParameters);
+
+        List<UsersGetDto> GetPassingUsers();
         User GetUserByPrivateNumber(string privatenumber);
         UsersGetDto UsersGetDtoByPrivateNumber(string privatenumber);
         public string CreatePasswordHash(string password);
